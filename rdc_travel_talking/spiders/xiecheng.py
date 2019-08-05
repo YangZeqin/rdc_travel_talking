@@ -21,9 +21,9 @@ class XiechengSpider(scrapy.Spider):
 
     def food_parse(self,response):
         item = RdcTravelTalkingItem()
+        self.id += 1
         item['id'] = self.id
         item['preview'] = response.xpath('.//div[@class="item active"]//img/@src').extract_first()
         item['title'] = response.xpath('.//li[@class="title ellipsis"]/text()').extract_first()
         item['content'] = response.xpath('.//li[@class="infotext"]/text()').extract_first().strip()
-        self.id += 1
         yield item
